@@ -1,0 +1,2 @@
+config:
+  remote: https://github.com/microconfig/microconfig-argocd-configs.git

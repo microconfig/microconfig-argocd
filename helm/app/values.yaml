@@ -1,0 +1,8 @@
+replicas: 1
+
+env: dev
+
+image:
+  repo: centos
+  tag: 7
+
