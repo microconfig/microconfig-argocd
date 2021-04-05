@@ -14,4 +14,4 @@ data:
         args: ["microctl save $MC_APP -t helm -e $MC_ENV -d configs --server http://microconfig-server.default.svc.cluster.local"]
       generate:
         command: [sh, -c]
-        args: ["helm template --values configs/values.yaml --values version.yaml $MC_APP app"]
+        args: ["helm template --values configs/values.yaml --values tag.yaml $MC_APP app"]

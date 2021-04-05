@@ -27,7 +27,9 @@ spec:
               value: http://microconfig-server.default.svc.cluster.local
             - name: MC_CMD
               value: save
-            - name: MC_COMPONENT
+            - name: MC_TYPE
+              value: app
+            - name: MC_SERVICE
               value: {{ .Release.Name }}
             - name: MC_ENV
               value: {{ .Values.env }}
