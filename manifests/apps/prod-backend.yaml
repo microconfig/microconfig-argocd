@@ -1,0 +1,26 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: prod-backend
+  namespace: argocd
+spec:
+  project: default
+  destination:
+    namespace: default
+    server: https://kubernetes.default.svc
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+  source:
+    path: applications/prod/backend
+    repoURL: https://github.com/microconfig/microconfig-argocd.git
+    targetRevision: HEAD
+    plugin:
+      name: microctl
+      # environment variables passed to the plugin
+      env:
+        - name: MC_APP
+          value: backend
+        - name: MC_ENV
+          value: prod
