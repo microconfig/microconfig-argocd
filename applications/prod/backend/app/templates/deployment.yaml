@@ -1,0 +1,49 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Release.Name }}
+  labels:
+    app: {{ .Release.Name }}
+spec:
+  replicas: {{.Values.replicas}}
+  selector:
+    matchLabels:
+      app: {{ .Release.Name }}
+  template:
+    metadata:
+      labels:
+        app: {{ .Release.Name }}
+    spec:
+      serviceAccountName: default
+      volumes:
+        - name: config
+          emptyDir: { }
+      initContainers:
+        - name: microctl
+          image: "microconfig/server-cli:latest"
+          imagePullPolicy: Always
+          env:
+            - name: MC_ADDRESS
+              value: http://microconfig-server.default.svc.cluster.local
+            - name: MC_CMD
+              value: save
+            - name: MC_TYPE
+              value: app
+            - name: MC_SERVICE
+              value: {{ .Release.Name }}
+            - name: MC_ENV
+              value: {{ .Values.env }}
+            - name: MC_DIR
+              value: "/config"
+          volumeMounts:
+            - name: config
+              mountPath: "/config"
+      containers:
+        - name: {{ .Chart.Name }}
+          image: "{{.Values.image.repo}}:{{.Values.image.tag}}"
+          imagePullPolicy: Always
+          command: [ "/bin/sh","-c" ]
+          args: [ "cat /config/application.yaml && sleep infinity" ]
+          volumeMounts:
+            - name: config
+              mountPath: "/config"
