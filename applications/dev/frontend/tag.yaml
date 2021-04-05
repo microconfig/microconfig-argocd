@@ -1,2 +1,3 @@
 # just alpine tag to simulate app versioning
-image.tag: 3.13
+image:
+  tag: 3.13
