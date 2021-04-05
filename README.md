@@ -2,9 +2,9 @@
 
 ## Installation
 * Install [ArgoCD](https://argoproj.github.io/argo-cd/getting_started/)
-* Build custom ArgoCD repo docker image with microctl included (docker/argocd) and use it in `argocd-repo-server` deployment
+* Build [custom](https://argoproj.github.io/argo-cd/operator-manual/custom_tools/) ArgoCD docker image with microctl (docker/argocd) and use it in `argocd-repo-server` deployment
 * Register custom `microctl` plugin (manifests/argocd/cm.yaml)
-* Deploy microconfig-server via [helm-char](https://github.com/microconfig/microconfig-server-helm) with custom values (manifests/microconfig-server/values.yaml)
+* Deploy microconfig-server via [helm-char](https://github.com/microconfig/microconfig-server-helm) with example repo (manifests/microconfig-server/values.yaml)
 * create `dev` and `prod` namespaces
 * add example apps (manifests/apps)
 
